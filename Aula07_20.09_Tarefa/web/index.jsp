@@ -47,11 +47,11 @@
    <div class="container"> 
    <table border="1" style="width:500px;height:150px">
             
-           <% List<String> lista = new ArrayList();
-           String sessionNumbers = "";
-              
-            if(sessionCounter <=1) { %>
-            
+           <% List<Integer> lista = new ArrayList();
+           ArrayList sessionNumbers = new ArrayList();           
+           String numbers = ""; 
+           
+            if(sessionCounter <=1) { %>            
             <tr>
                 <th>Índice</th>
                 <th>Número</th>
@@ -63,34 +63,29 @@
                 
                 <% int n = ((int) (Math.random()*100));%>
                 <td><%=n%></td>
-                <%  String numero = String.valueOf(n);
+                <%  int numero = (n);
                     lista.add(numero); 
                 %>
             </tr>         
         <% }  %>
-        <% String numbers = ""; 
-        session.setAttribute(numbers, lista.toString()); 
-        sessionNumbers = (String)session.getAttribute(numbers);
+        <% session.setAttribute(numbers, lista); 
         } 
-        else { %>
-            
+          sessionNumbers = (ArrayList)session.getAttribute(numbers);
+        if (sessionCounter > 1) { %>            
             <tr>
                 <th>Índice</th>
                 <th>Número</th>
             </tr>  
           <% for (int i = 0; i < 6; i++) { %>            
            <tr>
-               <th><%=i+1%></th>
-               <th><%=lista.size() == 0 ? null : lista.get(i)%></th>
+               <td><%=i+1%></td>
+               <td><%=sessionNumbers.get(i) %></td>
            </tr>
             <%}%>
         <%  } %>
-        </table>        
-        
-   </div>
-   
-   <%}%>
-  
+        </table>   
+   </div>   
+   <%}%>  
     </body>
 </html>
 
